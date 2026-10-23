@@ -1,0 +1,1 @@
+Security report for token 0xabab. owner_is_zero_address: true. sell_tax_bps: 2500. End of report.
