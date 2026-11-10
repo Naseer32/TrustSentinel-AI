@@ -19,7 +19,8 @@ export const CONTRACT_ERRORS = {
   not_collector: "Only authorised collectors can do this.",
 };
 
-const CODE_RE = new RegExp("\\b(" + Object.keys(CONTRACT_ERRORS).join("|") + ")\\s*:");
+// The slim contract raises either "code: info" or just "code"; accept a code followed by ":", a quote/paren, or end of line.
+const CODE_RE = new RegExp("\\b(" + Object.keys(CONTRACT_ERRORS).join("|") + ")\\b(?=\\s*(?::|[\"'\\\\)]|$))", "m");
 
 export function findContractCode(text) {
   if (typeof text !== "string") return null;

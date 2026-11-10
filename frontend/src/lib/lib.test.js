@@ -46,7 +46,10 @@ test("toInt", () => {
 
 test("contract error codes are found and described", () => {
   assert.equal(findContractCode("execution failed: bad_nonce: expected nonce 0"), "bad_nonce");
-  assert.equal(findContractCode("the contract is paused"), null);
+  assert.equal(findContractCode("the contract was paused by someone"), null);
+  assert.equal(findContractCode("GenVM: not_owner"), "not_owner");
+  assert.equal(findContractCode('_fail("not_owner")'), "not_owner");
+  assert.equal(findContractCode("a\nbad_nonce\nb"), "bad_nonce");
   assert.equal(describeError(new Error("boom cooldown: claim was checked too recently")).code, "cooldown");
   assert.equal(describeError({ code: 4001, message: "User rejected the request." }).code, "wallet_rejected");
   assert.equal(describeError(new Error("TypeError: Failed to fetch")).code, "network");
